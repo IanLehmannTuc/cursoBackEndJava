@@ -1,62 +1,39 @@
 package com.ilehmann.springboot.cursobackend.dominio;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Entity
+@Data
 public abstract class Producto {
-    private int codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idProducto;
     private String nombre;
-    private int Stock;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMarca")
+    private Marca marca;
+
     private String descripcion;
+    private int stock;
     private double precioSinIva;
 
-    public Producto(int codigo, String nombre, String descripcion, double precioSinIva) {
-        this.codigo = codigo;
+    public Producto() {
+    }
+
+    public Producto(String nombre, Marca marca, String descripcion, double precioSinIva) {
         this.nombre = nombre;
-        this.Stock = 50;
+        this.marca = marca;
         this.descripcion = descripcion;
         this.precioSinIva = precioSinIva;
     }
 
-    public int getCodigo() {
-        return codigo;
+    @PrePersist
+    public void prePersist() {
+        this.stock = 0;
     }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getStock() {
-        return Stock;
-    }
-
-    public void setStock(int stock) {
-        Stock = stock;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getPrecioSinIva() {
-        return precioSinIva;
-    }
-
-    public void setPrecioSinIva(double precioSinIva) {
-        this.precioSinIva = precioSinIva;
-    }
-
-    public abstract double getDetalle();
-    public abstract void setDetalle(double detalle);
-
 }

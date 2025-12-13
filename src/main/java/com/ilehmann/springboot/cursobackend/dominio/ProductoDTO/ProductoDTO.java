@@ -1,18 +1,13 @@
 package com.ilehmann.springboot.cursobackend.dominio.ProductoDTO;
 
-import com.ilehmann.springboot.cursobackend.dominio.Enum.ProductoEnum;
+import lombok.Data;
 
-
-public class ProductoDTO {
-
-    public ProductoEnum tipoProducto;
-    public int codigo;
-    public String nombre;
-    public String descripcion;
-    public double precio;
-
-    public Double litros;
-    public Double pesoKg;
-
-
+@Data
+public class ProductoDTO{
+    private Long idProducto;
+    private String nombre;
+    private String descripcion;
+    private double precioSinIva;
+    private String nombreMarca; // <--- Aquí guardaremos solo el nombre "Asus" o "AMD"
+    private String tipoProducto;
 }

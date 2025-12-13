@@ -1,26 +1,41 @@
 package com.ilehmann.springboot.cursobackend.dominio;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Pedido {
-    private int codigo;
-    private List<LineaPedido> linea = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPedido;
+    //private List<LineaPedido> linea = new ArrayList<>();
     private double CostoTotal;
 
-    public int getCodigo() {
-        return codigo;
+    public Pedido() {
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public Pedido(double costoTotal) {
+        CostoTotal = costoTotal;
     }
 
-    public List<LineaPedido> getLinea() {
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    /*public List<LineaPedido> getLinea() {
         return linea;
-    }
+    }*/
 
-    public void setLinea(List<LineaPedido> linea) {
+    /*public void setLinea(List<LineaPedido> linea) {
         this.linea = linea;
-    }
+    }*/
 }
